@@ -1,0 +1,5 @@
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\FeatureExtraction\bin\Debug\FeatureExtraction.dll
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\FeatureExtraction\bin\Debug\FeatureExtraction.pdb
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\FeatureExtraction\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\FeatureExtraction\obj\Debug\FeatureExtraction.dll
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\FeatureExtraction\obj\Debug\FeatureExtraction.pdb

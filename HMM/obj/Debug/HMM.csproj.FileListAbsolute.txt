@@ -1,0 +1,5 @@
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\HMM\bin\Debug\HMM.dll
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\HMM\bin\Debug\HMM.pdb
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\HMM\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\HMM\obj\Debug\HMM.dll
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\HMM\obj\Debug\HMM.pdb
