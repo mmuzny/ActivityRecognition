@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Classification
 {
-    public class KNN : Classifier<float>
+    public class KNN : Classifier<>
     {
         public KNN() { 
             

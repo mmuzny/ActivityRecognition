@@ -8,7 +8,6 @@ namespace EZ430Chronos
 {
     public class Class1
     {
-        eZ430ChronosNet.Chronos watch;
-        
+        Chronos atch = new Chronos();
     }
 }
