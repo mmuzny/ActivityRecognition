@@ -31,7 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="eZ430_Chronos_Net">
+    <Reference Include="eZ430_Chronos_Net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>.\eZ430_Chronos_Net.dll</HintPath>
     </Reference>
     <Reference Include="System" />

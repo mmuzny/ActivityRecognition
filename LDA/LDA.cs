@@ -111,7 +111,6 @@ namespace Classification
             {
                 for (j = 0; j < features; j++)
                 {
-                    double d = ((double)f1 / ((double)f1 + (double)f2));
                     c[i, j] = ((double)f1 / ((double)f1 + (double)f2)) * c_1[i, j] + ((double)f1 / ((double)f1 + (double)f2)) * c_2[i, j];
                 }
             }
