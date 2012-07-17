@@ -41,7 +41,7 @@ namespace Accelerometer
             x_axis = BitConverter.GetBytes((data >> 24) & 0xff)[0];
             y_axis = BitConverter.GetBytes((data >> 16) & 0xff)[0];         
             z_axis = BitConverter.GetBytes((data >> 8) & 0xff)[0];
-            Console.WriteLine("#{0}, #{1}, #{2}", x_axis, y_axis, z_axis);
+            Console.WriteLine("{0}, {1}, {2}", x_axis, y_axis, z_axis);
             count++;
             if (count < 100) { timer.Dispose(autoResetEvent); }
         }

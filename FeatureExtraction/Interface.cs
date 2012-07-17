@@ -64,16 +64,6 @@ namespace SignalProcessing
     }
 
     /// <summary>
-    /// Defines general gesture detector interface
-    /// </summary>
-    /// <typeparam name="T">Format or data structure of input signal</typeparam>
-    interface GestureDetector<T>
-    { 
-       //Core method to be implemented
-        
-    }
-
-    /// <summary>
     /// Defines interface for feature extractor
     /// </summary>
     /// <typeparam name="T">Format of signal data line</typeparam>

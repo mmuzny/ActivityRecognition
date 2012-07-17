@@ -1,0 +1,9 @@
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\3$Recognizer\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\3$Recognizer\bin\Debug\3$Recognizer.dll
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\3$Recognizer\bin\Debug\3$Recognizer.pdb
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\3$Recognizer\bin\Debug\Classifier.dll
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\3$Recognizer\bin\Debug\FeatureExtraction.dll
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\3$Recognizer\bin\Debug\Classifier.pdb
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\3$Recognizer\bin\Debug\FeatureExtraction.pdb
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\3$Recognizer\obj\Debug\3$Recognizer.dll
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\3$Recognizer\obj\Debug\3$Recognizer.pdb
