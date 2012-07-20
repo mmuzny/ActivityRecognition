@@ -31,6 +31,7 @@ namespace SignalProcessing
                var body_mul = Expression.Multiply(firstOperand, secondOperand);
                var body_add = Expression.Add(firstOperand, secondOperand);
                var body_div = Expression.Divide(firstOperand, secondOperand);
+                
                Sub = Expression.Lambda<Func<T, T, T>>
                      (body, firstOperand, secondOperand).Compile();
                Mul = Expression.Lambda<Func<T, T, T>>
@@ -82,6 +83,33 @@ namespace SignalProcessing
                 vectors = new Point3<T>[3];
             }
 
+            public Matrix3(double angle, Point3<T> axis) {                 
+                vectors = new Point3<T>[3];
+                double axis_x = (double) (object) axis.x, axis_y = (double) (object) axis.y, axis_z = (double) (object) axis.z;
+                vectors[0].x =(T) (object) (Math.Cos(angle) + Math.Pow(axis_x,2) * (1 - Math.Cos(angle)));
+                vectors[0].y =(T) (object) (axis_x*axis_y*(1-Math.Cos(angle)) - axis_z*Math.Sin(angle));
+                vectors[0].z =(T) (object) (axis_x*axis_z*(1-Math.Cos(angle)) + axis_y*Math.Sin(angle));
+                vectors[1].x =(T) (object) (axis_y*axis_x*(1-Math.Cos(angle)) + axis_z * (Math.Sin(angle)));
+                vectors[1].y =(T) (object) (axis_y*axis_y*(1-Math.Cos(angle)) + Math.Cos(angle));
+                vectors[1].z =(T) (object) (axis_y*axis_z*(1-Math.Cos(angle)) - axis_x*Math.Sin(angle));
+                vectors[2].x =(T) (object) (axis_z*axis_x*(1-Math.Cos(angle)) - axis_y* (Math.Sin(angle)));
+                vectors[2].y =(T) (object) (axis_y*axis_z*(1-Math.Cos(angle)) + axis_x*Math.Sin(angle));
+                vectors[2].z =(T) (object) (axis_z*axis_z*(1-Math.Cos(angle)) + Math.Cos(angle));
+            }
+
+            public Matrix3(double angle_x, double angle_y, double angle_z) { 
+                vectors = new Point3<T>[3];
+                vectors[0].x =(T) (object) (Math.Cos(angle_y) * Math.Cos(angle_z));
+                vectors[0].y =(T) (object) (-Math.Cos(angle_x) * Math.Sin(angle_z) + Math.Sin(angle_x) * Math.Sin(angle_x) * Math.Cos(angle_z));
+                vectors[0].z =(T) (object) (Math.Sin(angle_x) * Math.Sin(angle_z) + Math.Cos(angle_x) * Math.Sin(angle_x) * Math.Sin(angle_z));
+                vectors[1].x =(T) (object) (Math.Cos(angle_y) * Math.Sin(angle_z));
+                vectors[1].y =(T) (object) (Math.Cos(angle_x) * Math.Cos(angle_z) + Math.Sin(angle_x) * Math.Sin(angle_x) * Math.Sin(angle_z));
+                vectors[1].z =(T) (object) (-Math.Sin(angle_x) * Math.Cos(angle_z) + Math.Cos(angle_x) * Math.Sin(angle_x) * Math.Sin(angle_z));
+                vectors[2].x =(T) (object) (-Math.Sin(angle_y));
+                vectors[2].y =(T) (object) (Math.Sin(angle_x) * Math.Cos(angle_x));
+                vectors[2].z =(T) (object) (Math.Cos(angle_x) * Math.Cos(angle_y));
+            }
+
 
         }
 
@@ -91,6 +119,8 @@ namespace SignalProcessing
         public Unistroke(Unistroke<T> u){  
             this.trace = u.trace;
         }
+
+        public Unistroke() { }
 
         public Point3<T> this[int i] { 
             get {
