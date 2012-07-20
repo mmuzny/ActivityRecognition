@@ -48,7 +48,7 @@ namespace Classification
         }
 
         //Distance computation between two points
-        private double distance(Unistroke<M>.Point3<M> i,Unistroke<M>.Point3<M> j){
+        private double distance(Unistroke<M>.Point3<M> i,Unistroke<M>.Point3<M> j){           
             return Math.Sqrt(Math.Pow(Sub(i.x, j.x), 2) + Math.Pow(Sub(i.y, j.y), 2) + Math.Pow(Sub(i.z, j.z), 2)); 
         }
 
