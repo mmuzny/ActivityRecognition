@@ -12,12 +12,24 @@ namespace SignalProcessing
     /// <summary>
     /// Gesture class meant to define one gesture
     /// </summary>
-    class Gesture {
+    public class Gesture<M> {
+
+        public Gesture(string gesture_name) {
+            this._gestureName = gesture_name;
+            this.unistrokes = new List<Unistroke<M>>();
+        }
+
         //Defines name of a Gesture
-        string GestureName;
+        string _gestureName;
+        public string gestureName
+        {
+            get { return _gestureName; }
+            set { _gestureName = value; }
+        }
+
 
         //Defines gesture training sets
-        
+        public List<Unistroke<M>> unistrokes;        
     }
 
     /// <summary>
@@ -27,16 +39,20 @@ namespace SignalProcessing
         //Defines name of a Activity
         string ActivityName;
 
-        //Defines activity training sets
-        
+        //Defines activity training sets      
     }
 
     /// <summary>
     /// Gathers all gestures
     /// </summary>
-    class GestureSet {
+    public class GestureSet<M> {
+
+        public GestureSet() {
+            gestures = new List<Gesture<M>>();
+        }
+
         //List of possible recognizable gestures
-        public List<Gesture> gestures;
+        public List<Gesture<M>> gestures;
 
         //Count of gestures in set
         public int Count {
@@ -51,9 +67,10 @@ namespace SignalProcessing
     /// </summary>
     class ActivitySet {
         //List of possible recognizable activities
-        public List<Gesture> activities;
+        //public List<Gesture> activities;
 
         //Count of gestures in set
+        /*
         public int Count
         {
             get
@@ -61,6 +78,7 @@ namespace SignalProcessing
                 return activities.Count;
             }
         }
+        */
     }
 
     /// <summary>

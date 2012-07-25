@@ -120,7 +120,9 @@ namespace SignalProcessing
             this.trace = u.trace;
         }
 
-        public Unistroke() { }
+        public Unistroke() {
+            this.trace = new List<Point3<T>>();
+        }
 
         public Point3<T> this[int i] { 
             get {

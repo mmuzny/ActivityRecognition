@@ -1,0 +1,5 @@
+c:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\Classification\bin\Debug\Classifier.dll
+c:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\Classification\bin\Debug\Classifier.pdb
+c:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\Classification\obj\Debug\ResolveAssemblyReference.cache
+c:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\Classification\obj\Debug\Classifier.dll
+c:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\Classification\obj\Debug\Classifier.pdb

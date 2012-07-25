@@ -7,8 +7,8 @@ using SignalProcessing;
 
 namespace Classification
 {
-    public class ThreeDollarRecognizer<T,L,M> : Classifier<T,L> where T : SignalProcessing.Unistroke<M> 
-                                                              where L : List<T>
+    public class ThreeDollarRecognizer<T,L,M> : Classifier<T,L> where T : SignalProcessing.Unistroke<M>
+                                                                where L : GestureSet<M>
     {
         //Defines number of samples in one point serie (maybe 64??)
         private static int N = 40;
@@ -247,7 +247,7 @@ namespace Classification
         {
             double inf = double.PositiveInfinity; T best_template = null;
             for(int i = 0; i < templates.Count; i++){
-                T template = templates[i];
+                T template =(T) (object) templates.gestures[i].unistrokes[0];
                 double d = distance_at_best_angle(ref obj, ref template, Math.PI / 2, Math.PI / 2, Math.PI / 2, 2.0f * Math.PI * (15.0f / 360.0f));
                 if (d < inf) { inf = d; best_template = template; }
             }
@@ -258,6 +258,7 @@ namespace Classification
         
         //Train classifier by given training
         public int train(L obj){
+            templates = obj;
             return 0;
         }
     }

@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>d07860ee-e45a-4506-b66d-8fa49e457429</ProjectGuid>
+    <ProjectGuid>{FF7601BC-34C3-4353-90A8-1A8F7C0B97A6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>uWaveRecognizer</RootNamespace>
@@ -30,6 +30,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -40,8 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="uWaveRecognizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Classification\Classification.csproj">
+      <Project>{1C9CB3A2-7456-4F21-8721-CE5739D36C87}</Project>
+      <Name>Classification</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FeatureExtraction\FeatureExtraction.csproj">
+      <Project>{EEEE7730-1E06-4FBD-8C17-8200F9E32D68}</Project>
+      <Name>FeatureExtraction</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
