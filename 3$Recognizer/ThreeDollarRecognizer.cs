@@ -14,7 +14,7 @@ namespace Classification
         private static int N = 40;
 
         //Defines size of the bounding cube which is used to scale
-        private static int size = 127;
+        private static dynamic size = 127;
 
         //Templates list
         private static L templates;
@@ -23,7 +23,7 @@ namespace Classification
         private static double phi = 0.5f * (-1 + Math.Sqrt(5));
         
         //Expression tree build lambda function for subtraction
-        private static readonly Func<M, M, double> Sub, Add, Mul, Div;
+        private static readonly Func<M, M, M> Sub, Add, Mul, Div;
         private static readonly Func<M, M, bool> Greater;
 
         //Static class constructor
@@ -35,22 +35,24 @@ namespace Classification
             var body_div = Expression.Subtract(firstOperand, secondOperand);
             var body_add = Expression.Subtract(firstOperand, secondOperand);
             var body_gt = Expression.GreaterThan(firstOperand, secondOperand);
-            Sub = Expression.Lambda<Func<M, M, double>>
+            Sub = Expression.Lambda<Func<M, M, M>>
                   (body, firstOperand, secondOperand).Compile();
-            Div = Expression.Lambda<Func<M, M, double>>
+            Div = Expression.Lambda<Func<M, M, M>>
                   (body_div, firstOperand, secondOperand).Compile();
-            Add = Expression.Lambda<Func<M, M, double>>
+            Add = Expression.Lambda<Func<M, M, M>>
                   (body_add, firstOperand, secondOperand).Compile();
-            Mul = Expression.Lambda<Func<M, M, double>>
+            Mul = Expression.Lambda<Func<M, M, M>>
                   (body_mul, firstOperand, secondOperand).Compile();
             Greater = Expression.Lambda<Func<M, M, bool>>
                   (body_gt, firstOperand, secondOperand).Compile();
         }
 
-        //Distance computation between two points
-        private double distance(Unistroke<M>.Point3<M> i,Unistroke<M>.Point3<M> j){           
-            return Math.Sqrt(Math.Pow(Sub(i.x, j.x), 2) + Math.Pow(Sub(i.y, j.y), 2) + Math.Pow(Sub(i.z, j.z), 2)); 
+        //Compute distance between 2 points
+        private double distance(Unistroke<M>.Point3<M> a, Unistroke<M>.Point3<M> b)
+        {
+            return Math.Sqrt(Math.Pow((double)(object)Sub(a.x, b.x), 2) + Math.Pow((double)(object)Sub(a.y, b.y), 2) + Math.Pow((double)(object)Sub(a.z, b.z), 2));
         }
+
 
         //Determines length of whole path
         private double path_length(ref T unistroke) {
@@ -66,11 +68,9 @@ namespace Classification
         //Determines path distance
         private double path_distance(ref T u_1, ref T u_2) {
             double d = 0;
-
             for (int i = 0; i < u_1.Length()-1; i++) {
                 d += distance(u_1[i], u_2[i + 1]); 
             }
-
             return d;
         }
 
@@ -79,17 +79,17 @@ namespace Classification
         {
             new_points = new List<Unistroke<M>.Point3<M>>();
             Unistroke<M> u = uni;
-            double d_seq = path_length(ref uni) / (N - 1);
-            int i = 0; double d_curr = 0, d_comp = 0;
+            dynamic d_seq = path_length(ref uni) / (N - 1);
+            int i = 0; dynamic d_curr = 0, d_comp = 0;
             for (i=0; i<u.trace.Count; i++){
                 d_curr = distance(u[i], u[i + 1]);
                 if (d_curr + d_comp > d_seq)
                 {
-                    double x = Add(u[i - 1].x, (M)(object)((d_seq - d_comp) * Sub(u[i].x, u[i - 1].x)));
-                    double y = Add(u[i - 1].y, (M)(object)((d_seq - d_comp) * Sub(u[i].y, u[i - 1].y)));
-                    double z = Add(u[i - 1].z, (M)(object)((d_seq - d_comp) * Sub(u[i].z, u[i - 1].z)));
-                    new_points.Add(new Unistroke<M>.Point3<M>((M)(object)x, (M)(object)y, (M)(object)z));
-                    uni.trace.Insert(i + 1, new Unistroke<M>.Point3<M>((M)(object)x, (M)(object)y, (M)(object)z));
+                    M x = Add(u[i - 1].x, Mul((M) (object) (d_seq - d_comp), Sub(u[i].x, u[i - 1].x)));
+                    M y = Add(u[i - 1].y, Mul((M) (object) (d_seq - d_comp), Sub(u[i].y, u[i - 1].y)));
+                    M z = Add(u[i - 1].z, Mul((M) (object) (d_seq - d_comp), Sub(u[i].z, u[i - 1].z)));
+                    new_points.Add(new Unistroke<M>.Point3<M>(x, y, z));
+                    uni.trace.Insert(i + 1, new Unistroke<M>.Point3<M>(x, y, z));
                     d_comp = 0;
                 }
                 else 
@@ -101,16 +101,17 @@ namespace Classification
         
         //Find the set centroid
         private void centroid(ref T uni, out Unistroke<M>.Point3<M> centroid) {
+            dynamic l = uni.trace.Count;
             centroid = new Unistroke<M>.Point3<M>();
             for (int i = 0; i < uni.trace.Count; i++){
-                centroid.x = (M) (object) Add(uni[i].x, centroid.x);
-                centroid.y = (M) (object) Add(uni[i].y, centroid.y);
-                centroid.z = (M) (object) Add(uni[i].z, centroid.z);
+                centroid.x = Add(uni[i].x, centroid.x);
+                centroid.y = Add(uni[i].y, centroid.y);
+                centroid.z = Add(uni[i].z, centroid.z);
             }
 
-            centroid.x = (M)(object)((double)(object)centroid.x / uni.trace.Count);
-            centroid.y = (M)(object)((double)(object)centroid.y / uni.trace.Count);
-            centroid.x = (M)(object)((double)(object)centroid.x / uni.trace.Count);
+            centroid.x = Div(centroid.x, (M)(object)uni.trace.Count);
+            centroid.y = Div(centroid.y, (M)(object)uni.trace.Count);
+            centroid.z = Div(centroid.z, (M)(object)uni.trace.Count);
         }
 
         //Rotates points set by given angle and axis
@@ -122,18 +123,16 @@ namespace Classification
         }
 
         //Rotate each point to zero in respect to indicative angle between first point and the set centroid
-        private void rotate_to_zero(ref T uni, out Unistroke<M> new_points)
+        private void rotate_to_zero(ref T uni)
         {
-            new_points = new Unistroke<M>(uni);
             Unistroke<M>.Point3<M> center;
-            Unistroke<M> u = uni;
             centroid(ref uni,out center);
-            double angle = Math.Acos((double) (object) (center * uni[0]) / Mul(center.size(), uni[0].size()));
+            double angle = Math.Acos((double) (object) Div((center * uni[0]), Mul(center.size(), uni[0].size())));
             Unistroke<M>.Point3<M> axis = (center ^ uni[0]) / (center ^ uni[0]).size();
             //Here, the 3d rotation matrix is constructed
             Unistroke<M>.Matrix3<M> rotation_matrix = new Unistroke<M>.Matrix3<M>(angle, axis);
             for (int i = 0; i < uni.trace.Count; i++) {
-                new_points[i] = (rotation_matrix * (uni[i] - center)) + center;
+                uni[i] = (rotation_matrix * (uni[i] - center)) + center;
             }
         }
 
@@ -155,28 +154,26 @@ namespace Classification
         }
 
         //Scales points data set to cube
-        private void scale_to_cube(ref T uni, out Unistroke<M> new_points) {
-            double width, height, depth;
-            new_points = new Unistroke<M>(uni);
+        private void scale_to_cube(ref T uni) {
+            M width, height, depth;
             Unistroke<M>.Point3<M> a, b;
             bounding_box(ref uni, out a, out b);
             width = Sub(b.x, a.x);
             height = Sub(b.y, a.y);
             depth = Sub(b.z, a.z);
             for (int i = 0; i < uni.trace.Count; i++) {
-                new_points[i].x =(M) (object) Mul(uni[i].x,(M) (object) (size / width)); 
-                new_points[i].y =(M) (object) Mul(uni[i].y,(M) (object) (size / width)); 
-                new_points[i].z =(M) (object) Mul(uni[i].z,(M) (object) (size / width)); 
+                uni[i].x =(M) (object) Mul(uni[i].x,(M) (object) (size / width)); 
+                uni[i].y =(M) (object) Mul(uni[i].y,(M) (object) (size / width)); 
+                uni[i].z =(M) (object) Mul(uni[i].z,(M) (object) (size / width)); 
             }
         }
         
         //Translates points in respect to original centroid
-        private void translate_to_original(ref T uni, out Unistroke<M> new_points) {
+        private void translate_to_original(ref T uni) {
             Unistroke<M>.Point3<M> p;
-            new_points = new Unistroke<M>();
             centroid(ref uni, out p);
             for (int i = 0; i < uni.trace.Count; i++) {
-                new_points.trace.Add(new Unistroke<M>.Point3<M>((M) (object) Sub(uni[i].x, p.x), (M) (object)Sub(uni[i].y, p.y), (M) (object) Sub(uni[i].z, p.z)));
+                uni[i] = new Unistroke<M>.Point3<M>((M) (object) Sub(uni[i].x, p.x), (M) (object)Sub(uni[i].y, p.y), (M) (object) Sub(uni[i].z, p.z));
             }          
         }
 
@@ -205,7 +202,7 @@ namespace Classification
             Unistroke<M>.Matrix3<M> rotation_matrix = new Unistroke<M>.Matrix3<M>(angles[0], angles[1], angles[2]);
             T new_points =(T) new Unistroke<M>();
             for (int i = 0; i < uni.trace.Count; i++) {
-                new_points[i] = rotation_matrix * uni[i];
+                new_points.trace.Add(rotation_matrix * uni[i]);
             }
             return path_distance(ref new_points, ref t);
         }
@@ -245,10 +242,17 @@ namespace Classification
         //Classify feature vector according to training structures
         public int classify(T obj, out int result)
         {
+            List<Unistroke<M>.Point3<M>> temp;
+            resample(ref obj, out temp);
+            obj = (T)(object)temp;
+            rotate_to_zero(ref obj);
+            scale_to_cube(ref obj);
+            translate_to_original(ref obj);
             double inf = double.PositiveInfinity; T best_template = null;
             for(int i = 0; i < templates.Count; i++){
                 T template =(T) (object) templates.gestures[i].unistrokes[0];
                 double d = distance_at_best_angle(ref obj, ref template, Math.PI / 2, Math.PI / 2, Math.PI / 2, 2.0f * Math.PI * (15.0f / 360.0f));
+               System.Console.WriteLine("Distance template " + i + " " + d);
                 if (d < inf) { inf = d; best_template = template; }
             }
 
@@ -259,6 +263,16 @@ namespace Classification
         //Train classifier by given training
         public int train(L obj){
             templates = obj;
+            for (int i = 0; i < templates.Count; i++) { 
+                 List<Unistroke<M>.Point3<M>> temp;
+                 T template =(T) (object) templates.gestures[i].unistrokes[0];
+                 resample(ref template, out temp);
+                 template = (T)(object)temp;
+                 rotate_to_zero(ref template);
+                 scale_to_cube(ref template);
+                 translate_to_original(ref template);
+                 Console.WriteLine(i);
+            }
             return 0;
         }
     }

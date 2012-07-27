@@ -43,6 +43,16 @@
     <Compile Include="KNN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Classification\Classification.csproj">
+      <Project>{1C9CB3A2-7456-4F21-8721-CE5739D36C87}</Project>
+      <Name>Classification</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FeatureExtraction\FeatureExtraction.csproj">
+      <Project>{EEEE7730-1E06-4FBD-8C17-8200F9E32D68}</Project>
+      <Name>FeatureExtraction</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

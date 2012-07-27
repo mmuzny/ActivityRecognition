@@ -72,11 +72,20 @@ namespace Classification
             //Scales value to -16..16 value range
             private void distraction_table(ref M value) {
                 double cast_value = (double)(object)value;
-                if ((cast_value > 80) && !(cast_value > 128)) {cast_value = 16; }
-                else if ((cast_value > 40) && !(cast_value > 80)) {cast_value = 10 + (cast_value-10)/10 *5;}
-                else if ((cast_value > -20) && !(cast_value > -10)) {cast_value = -10 + (cast_value+10)/10 *5;}
-                else if ((cast_value > -128) && !(cast_value > -80)) {cast_value = -16;}
-                else if ((cast_value > -40) && !(cast_value > 40)) {cast_value = cast_value / 4;}
+                /*
+                if ((cast_value > 80) && (cast_value < 128)) {cast_value = 16; }
+                else if ((cast_value > 40) && (cast_value < 80)) {cast_value = 10 + (cast_value-10)/10 *5;}
+                else if ((cast_value > -80) && (cast_value < -40)) {cast_value = -10 + (cast_value+10)/10 *5;}
+                else if ((cast_value > -128) && (cast_value < -80)) {cast_value = -16;}
+                else if ((cast_value < -40) && (cast_value < 40)) {cast_value = cast_value / 4;}
+                else {cast_value = 0;}
+                */
+                if ((cast_value > 2304)) {cast_value = 16; }
+                else if ((cast_value > 1152) && (cast_value <= 2304)) {cast_value = 11 + (cast_value-1152) * 0.003472;}
+                else if ((cast_value > 0) && (cast_value <= 1152)) { cast_value = 1 +(cast_value) * 0.0078125; }                
+                else if ((cast_value >= -1152) && (cast_value < 0)) {  cast_value = -1 - (cast_value) * 0.0078125;}
+                else if ((cast_value >= -2304) && (cast_value < -1152)) { cast_value =-11 - (cast_value+1152) * 0.003472;}                
+                else if ((cast_value < -2304)) {cast_value = 16; }
                 else {cast_value = 0;}
                 value = (M)(object)cast_value;
             }

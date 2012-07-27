@@ -65,7 +65,7 @@ namespace SignalProcessing
     /// <summary>
     /// Gathers all activities
     /// </summary>
-    class ActivitySet {
+    public class ActivitySet<M> {
         //List of possible recognizable activities
         //public List<Gesture> activities;
 

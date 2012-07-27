@@ -51,6 +51,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\3%24Recognizer\3%24Recognizer.csproj">
+      <Project>{A2D17426-376B-4FFA-82C7-1D59790685B9}</Project>
+      <Name>3%24Recognizer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Classification\Classification.csproj">
       <Project>{1C9CB3A2-7456-4F21-8721-CE5739D36C87}</Project>
       <Name>Classification</Name>

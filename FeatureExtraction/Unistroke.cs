@@ -99,6 +99,7 @@ namespace SignalProcessing
 
             public Matrix3(double angle_x, double angle_y, double angle_z) { 
                 vectors = new Point3<T>[3];
+                for (int i = 0; i < 3; i++) { vectors[i] = new Point3<T>(); }
                 vectors[0].x =(T) (object) (Math.Cos(angle_y) * Math.Cos(angle_z));
                 vectors[0].y =(T) (object) (-Math.Cos(angle_x) * Math.Sin(angle_z) + Math.Sin(angle_x) * Math.Sin(angle_x) * Math.Cos(angle_z));
                 vectors[0].z =(T) (object) (Math.Sin(angle_x) * Math.Sin(angle_z) + Math.Cos(angle_x) * Math.Sin(angle_x) * Math.Sin(angle_z));

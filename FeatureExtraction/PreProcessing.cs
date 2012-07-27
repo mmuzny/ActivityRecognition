@@ -8,25 +8,7 @@ namespace SignalProcessing
 {
     public class PreProcessing
     {
-
-        public static void loadGestures_i(ref GestureSet<int> gestures) {
-            gestures = new GestureSet<int>(); 
-
-            XmlDocument doc = new XmlDocument();
-            doc.Load("gestures.xml");
-            XmlNodeList nl = doc.GetElementsByTagName("gesture");
-            foreach(XmlNode n in nl){
-                XmlAttributeCollection collection = n.Attributes;
-                Gesture<int> g = new Gesture<int>(collection[0].InnerText);
-                gestures.gestures.Add(g);
-                Unistroke<int> u = new Unistroke<int>();
-                foreach(XmlNode k in n.ChildNodes){
-                    XmlAttributeCollection points = k.Attributes;
-                    u.trace.Add(new Unistroke<int>.Point3<int>(Int32.Parse(points[0].InnerText), Int32.Parse(points[1].InnerText), Int32.Parse(points[2].InnerText)));                                
-                }
-                g.unistrokes.Add(u);
-            }
-        }
+        //Loads gestures into GestureSet
         public static void loadGestures(ref GestureSet<double> gestures) {
             gestures = new GestureSet<double>(); 
 
@@ -46,12 +28,16 @@ namespace SignalProcessing
             }
         }
 
+        //Saves given Unistroke to file as a new gesture with name specified
         public static void saveGesture(ref SignalProcessing.Unistroke<double> u, string name) {
             XmlDocument doc = new XmlDocument();
 
             doc.Load("gestures.xml");
             XmlNodeList nl = doc.GetElementsByTagName("gesture_set");
             XmlElement gesture_elem= doc.CreateElement("gesture");
+            XmlAttribute ident = doc.CreateAttribute("name");
+            ident.InnerText = name;
+            gesture_elem.Attributes.Append(ident);
             
             for(int i = 0; i < u.trace.Count; i++){
                 XmlElement n = doc.CreateElement("point");
