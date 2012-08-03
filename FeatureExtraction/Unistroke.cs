@@ -12,6 +12,8 @@ namespace SignalProcessing
         public class Point3<T> : IComparable{
 
            public static readonly Func<T, T, T> Sub, Add, Mul, Div;
+           public static readonly Func<T, T, bool> Greater;
+
 
            public T x, y, z;
 
@@ -31,7 +33,8 @@ namespace SignalProcessing
                var body_mul = Expression.Multiply(firstOperand, secondOperand);
                var body_add = Expression.Add(firstOperand, secondOperand);
                var body_div = Expression.Divide(firstOperand, secondOperand);
-                
+               var body_gt = Expression.GreaterThan(firstOperand, secondOperand);
+
                Sub = Expression.Lambda<Func<T, T, T>>
                      (body, firstOperand, secondOperand).Compile();
                Mul = Expression.Lambda<Func<T, T, T>>
@@ -40,6 +43,9 @@ namespace SignalProcessing
                      (body_add, firstOperand, secondOperand).Compile();
                Div = Expression.Lambda<Func<T, T, T>>
                      (body_div, firstOperand, secondOperand).Compile();
+               Greater = Expression.Lambda<Func<T, T, bool>>
+                     (body_gt, firstOperand, secondOperand).Compile();
+
            }
 
            public T size() {
@@ -110,7 +116,6 @@ namespace SignalProcessing
                 vectors[2].y =(T) (object) (Math.Sin(angle_x) * Math.Cos(angle_x));
                 vectors[2].z =(T) (object) (Math.Cos(angle_x) * Math.Cos(angle_y));
             }
-
 
         }
 

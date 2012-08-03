@@ -35,11 +35,12 @@ namespace Accelerometer
         /// </summary>
         /// <returns>Succes of operation</returns>
         public static int connect_and_receive() {
+            uint data;
             PreProcessing.loadGestures(ref gestures);
             uwave = new uWaveRecognizer<Unistroke<double>,GestureSet<double>, double>();
-            dollar = new ThreeDollarRecognizer<Unistroke<double>,GestureSet<double>, double>();
+            //dollar = new ThreeDollarRecognizer<Unistroke<double>,GestureSet<double>, double>();
             uwave.train(gestures);
-            dollar.train(gestures);
+            //dollar.train(gestures);
             string port_name = watch.GetComPortName();
             watch.OpenComPort(port_name);
             watch.StartSimpliciTI();
@@ -72,6 +73,9 @@ namespace Accelerometer
             x_axis = (double) (x_data*18*0.5 + prev_x*0.5 - x_offset); 
             y_axis = (double) (y_data*18*0.5 + prev_y*0.5 - y_offset); 
             z_axis = (double) (z_data*18*0.5 + prev_z*0.5 - z_offset); 
+            //x_axis = (double) (x_data*18*0.5 + prev_x*0.5); 
+            //y_axis = (double) (y_data*18*0.5 + prev_y*0.5); 
+            //z_axis = (double) (z_data*18*0.5 + prev_z*0.5); 
             
             if (x_axis == 0 && y_axis == 0 && z_axis == 0) return;
             if (count == 1) { x_offset = prev_x; y_offset = prev_y; z_offset = prev_z; }
@@ -95,7 +99,8 @@ namespace Accelerometer
                 else if (sum > 300 && current_state == States.GESTURE_PRECALL && buffered_count < 10)
                 {
                     buffered_count++;
-                    Console.WriteLine("Add buffered sample");
+                    //Console.WriteLine("Add buffered sample");
+                    //Console.WriteLine("{0}, {1}, {2}", x_axis, y_axis, z_axis);
                     unistroke.trace.Add(new Unistroke<double>.Point3<double>((double) x_axis, (double) y_axis, (double) z_axis));
                 }
                 else if (buffered_count >= 10 && current_state == States.GESTURE_PRECALL) {                                    
@@ -108,21 +113,21 @@ namespace Accelerometer
                 {
                     //Console.WriteLine("Gesture Preexit");
                     current_state = States.PREEXIT;
+                    unistroke.trace.Add(new Unistroke<double>.Point3<double>((double) x_axis, (double) y_axis, (double) z_axis));
                 }
                 else if (sum < 300 && current_state == States.PREEXIT)
                 {
                     current_state = States.IDLE;
                     Console.WriteLine("Gesture EXIT");
-                    //PreProcessing.saveGesture(ref unistroke, "H");
+                    //PreProcessing.saveGesture(ref unistroke, "RECTANGLE");
                     int res;
-                    //uwave.classify(unistroke, out res);
-                    dollar.classify(unistroke, out res);
-                    Console.Write(gestures.gestures[res].gestureName);
+                    uwave.classify(unistroke, out res);
+                    //dollar.classify(unistroke, out res);
+                    Console.WriteLine("Recognized gesture: "+gestures.gestures[res].gestureName);
                 }
                 else if (current_state == States.GESTURE_RECORDING)
                 {
                     //Console.WriteLine("Recording gesture");
-                    //Console.WriteLine("{0}, {1}, {2}", x_axis, y_axis, z_axis);
                     unistroke.trace.Add(new Unistroke<double>.Point3<double>((double)x_axis, (double)y_axis, (double)z_axis));
                 }
                 //Console.WriteLine(sum);

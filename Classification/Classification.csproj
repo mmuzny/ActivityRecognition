@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Classification.cs" />
     <Compile Include="FeatureInstance.cs" />
+    <Compile Include="OneVsAll.cs" />
     <Compile Include="PostProcessing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

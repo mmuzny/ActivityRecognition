@@ -1,0 +1,7 @@
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\Wavelets\bin\Debug\Wavelets.dll
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\Wavelets\bin\Debug\Wavelets.pdb
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\Wavelets\bin\Debug\MathPrimitives.dll
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\Wavelets\bin\Debug\MathPrimitives.pdb
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\Wavelets\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\Wavelets\obj\Debug\Wavelets.dll
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\Wavelets\obj\Debug\Wavelets.pdb

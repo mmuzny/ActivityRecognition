@@ -25,27 +25,15 @@ namespace Classification
 
             //Expression tree build lambda function for subtraction
             private static readonly Func<M, M, M> Sub, Add, Mul, Div;
-            private static readonly Func<M, M, bool> Greater;
+            private static readonly Func<M, M, bool> Greater;            
             
             //Static constructor definition
-            static uWaveRecognizer() {
-                var firstOperand = Expression.Parameter(typeof(M), "i");
-                var secondOperand = Expression.Parameter(typeof(M), "j");
-                var body = Expression.Subtract(firstOperand, secondOperand);
-                var body_mul = Expression.Subtract(firstOperand, secondOperand);
-                var body_div = Expression.Subtract(firstOperand, secondOperand);
-                var body_add = Expression.Subtract(firstOperand, secondOperand);
-                var body_gt = Expression.GreaterThan(firstOperand, secondOperand);
-                Sub = Expression.Lambda<Func<M, M, M>>
-                      (body, firstOperand, secondOperand).Compile();
-                Div = Expression.Lambda<Func<M, M, M>>
-                      (body_div, firstOperand, secondOperand).Compile();
-                Add = Expression.Lambda<Func<M, M, M>>
-                      (body_add, firstOperand, secondOperand).Compile();
-                Mul = Expression.Lambda<Func<M, M, M>>
-                      (body_mul, firstOperand, secondOperand).Compile();
-                Greater = Expression.Lambda<Func<M, M, bool>>
-                      (body_gt, firstOperand, secondOperand).Compile();
+            static uWaveRecognizer() {            
+                Add = Unistroke<M>.Point3<M>.Add;
+                Sub = Unistroke<M>.Point3<M>.Sub;
+                Mul = Unistroke<M>.Point3<M>.Mul;
+                Div = Unistroke<M>.Point3<M>.Div;
+                Greater = Unistroke<M>.Point3<M>.Greater;
             }
 
             public uWaveRecognizer() { }
@@ -72,14 +60,15 @@ namespace Classification
             //Scales value to -16..16 value range
             private void distraction_table(ref M value) {
                 double cast_value = (double)(object)value;
-                /*
-                if ((cast_value > 80) && (cast_value < 128)) {cast_value = 16; }
-                else if ((cast_value > 40) && (cast_value < 80)) {cast_value = 10 + (cast_value-10)/10 *5;}
-                else if ((cast_value > -80) && (cast_value < -40)) {cast_value = -10 + (cast_value+10)/10 *5;}
-                else if ((cast_value > -128) && (cast_value < -80)) {cast_value = -16;}
-                else if ((cast_value < -40) && (cast_value < 40)) {cast_value = cast_value / 4;}
+                if ((cast_value > 1152)) {cast_value = 16; }
+                else if ((cast_value > 576) && (cast_value <= 1152)) { cast_value = 11 + (cast_value) * 0.00694; }                
+                else if ((cast_value > 0) && (cast_value <= 576)) { cast_value = 1 + (cast_value) * 0.015625; }                
+                else if ((cast_value >= -576) && (cast_value < 0)) {  cast_value = -1 - (cast_value) * 0.015625;}
+                else if ((cast_value < -576) && (cast_value >= -1152)) { cast_value = -11 - (cast_value) * 0.00694; }                
+                else if ((cast_value < -1152)) {cast_value = -16; }
                 else {cast_value = 0;}
-                */
+                //Scaled with no respect to values interval
+                /*
                 if ((cast_value > 2304)) {cast_value = 16; }
                 else if ((cast_value > 1152) && (cast_value <= 2304)) {cast_value = 11 + (cast_value-1152) * 0.003472;}
                 else if ((cast_value > 0) && (cast_value <= 1152)) { cast_value = 1 +(cast_value) * 0.0078125; }                
@@ -87,6 +76,7 @@ namespace Classification
                 else if ((cast_value >= -2304) && (cast_value < -1152)) { cast_value =-11 - (cast_value+1152) * 0.003472;}                
                 else if ((cast_value < -2304)) {cast_value = 16; }
                 else {cast_value = 0;}
+                */
                 value = (M)(object)cast_value;
             }
 
@@ -102,7 +92,7 @@ namespace Classification
 
             //Compute distance between 2 points
             private double compute_distance(Unistroke<M>.Point3<M> a, Unistroke<M>.Point3<M> b) {
-                return Math.Pow((double) (object) Sub(a.x, b.x), 2) + Math.Pow((double) (object)Sub(a.y, b.y), 2) + Math.Pow((double) (object)Sub(a.z, b.z), 2);
+                return Math.Sqrt(Math.Pow((double) (object) Sub(a.x, b.x), 2) + Math.Pow((double) (object)Sub(a.y, b.y), 2) + Math.Pow((double) (object)Sub(a.z, b.z), 2));
             }
 
             //Iterative Dynamic Time Warping function to compute table values

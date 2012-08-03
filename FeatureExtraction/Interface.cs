@@ -6,21 +6,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Linq.Expressions;
 
 namespace SignalProcessing
 {
+
     /// <summary>
     /// Gesture class meant to define one gesture
     /// </summary>
     public class Gesture<M> {
-
+ 
         public Gesture(string gesture_name) {
             this._gestureName = gesture_name;
             this.unistrokes = new List<Unistroke<M>>();
         }
 
         //Defines name of a Gesture
-        string _gestureName;
+        private string _gestureName;
         public string gestureName
         {
             get { return _gestureName; }
@@ -35,11 +37,18 @@ namespace SignalProcessing
     /// <summary>
     /// Activity class meant to define one activity
     /// </summary>
-    class Activity { 
+    class Activity<M> { 
+
+        public Activity(string activity_name) {
+            this._activityName = activity_name;
+            this.activity_records = new List<ActivityRecord<M>>();
+        }
+
         //Defines name of a Activity
-        string ActivityName;
+        string _activityName;
 
         //Defines activity training sets      
+        public List<ActivityRecord<M>> activity_records;        
     }
 
     /// <summary>

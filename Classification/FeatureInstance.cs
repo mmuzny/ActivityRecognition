@@ -38,7 +38,6 @@ namespace Classification
             }
         }
 
-
         /// <summary>
         /// HashSet containing classes associated with feature instance
         /// </summary>

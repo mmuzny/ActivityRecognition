@@ -80,22 +80,23 @@ namespace Classification
             new_points = new List<Unistroke<M>.Point3<M>>();
             Unistroke<M> u = uni;
             dynamic d_seq = path_length(ref uni) / (N - 1);
-            int i = 0; dynamic d_curr = 0, d_comp = 0;
-            for (i=0; i<u.trace.Count; i++){
-                d_curr = distance(u[i], u[i + 1]);
-                if (d_curr + d_comp > d_seq)
+            int i = 1; dynamic d_curr = 0, d_comp = 0;
+            while (i < u.trace.Count){
+                d_curr = distance(u[i-1], u[i]);
+                if (d_curr + d_comp >= d_seq)
                 {
-                    M x = Add(u[i - 1].x, Mul((M) (object) (d_seq - d_comp), Sub(u[i].x, u[i - 1].x)));
-                    M y = Add(u[i - 1].y, Mul((M) (object) (d_seq - d_comp), Sub(u[i].y, u[i - 1].y)));
-                    M z = Add(u[i - 1].z, Mul((M) (object) (d_seq - d_comp), Sub(u[i].z, u[i - 1].z)));
+                    M x = Add(u[i - 1].x, Mul(Div((M) (object) (d_seq - d_comp),d_curr), Sub(u[i].x, u[i - 1].x)));
+                    M y = Add(u[i - 1].y, Mul(Div((M) (object) (d_seq - d_comp),d_curr), Sub(u[i].y, u[i - 1].y)));
+                    M z = Add(u[i - 1].z, Mul(Div((M) (object) (d_seq - d_comp),d_curr), Sub(u[i].z, u[i - 1].z)));
                     new_points.Add(new Unistroke<M>.Point3<M>(x, y, z));
-                    uni.trace.Insert(i + 1, new Unistroke<M>.Point3<M>(x, y, z));
+                    uni.trace.Insert(i+1, new Unistroke<M>.Point3<M>(x, y, z));
                     d_comp = 0;
                 }
                 else 
                 {
                     d_comp += d_curr;
-                } 
+                }
+                i++;
             }
         }
         
