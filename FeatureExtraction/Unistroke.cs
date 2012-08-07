@@ -76,7 +76,7 @@ namespace SignalProcessing
                 return new Point3<T>(m.vectors[0] * p, m.vectors[1] * p, m.vectors[2] * p);
             }
             
-            //Compares two points distances off the standard basis 
+            //Compares two points distances off the standard basis -- TODO
             public int CompareTo(object p){
                 return 0;
             }

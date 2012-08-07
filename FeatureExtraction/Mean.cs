@@ -5,9 +5,9 @@ using System.Text;
 
 namespace SignalProcessing
 {
-    class Mean : FeatureExtractor<float[],float>
+    class Mean : FeatureExtractor<float[],double>
     {
-        public float ExtractFeature(ref float[] values_array)
+        public double ExtractFeature(ref float[] values_array)
         {
             float sum=0;
             foreach (float value in values_array){

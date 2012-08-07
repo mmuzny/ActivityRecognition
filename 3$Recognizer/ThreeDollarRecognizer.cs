@@ -163,9 +163,9 @@ namespace Classification
             height = Sub(b.y, a.y);
             depth = Sub(b.z, a.z);
             for (int i = 0; i < uni.trace.Count; i++) {
-                uni[i].x =(M) (object) Mul(uni[i].x,(M) (object) (size / width)); 
-                uni[i].y =(M) (object) Mul(uni[i].y,(M) (object) (size / width)); 
-                uni[i].z =(M) (object) Mul(uni[i].z,(M) (object) (size / width)); 
+                uni[i].x = Mul(uni[i].x,(M) (object) (size / width)); 
+                uni[i].y = Mul(uni[i].y,(M) (object) (size / width)); 
+                uni[i].z = Mul(uni[i].z,(M) (object) (size / width)); 
             }
         }
         
@@ -174,7 +174,7 @@ namespace Classification
             Unistroke<M>.Point3<M> p;
             centroid(ref uni, out p);
             for (int i = 0; i < uni.trace.Count; i++) {
-                uni[i] = new Unistroke<M>.Point3<M>((M) (object) Sub(uni[i].x, p.x), (M) (object)Sub(uni[i].y, p.y), (M) (object) Sub(uni[i].z, p.z));
+                uni[i] = new Unistroke<M>.Point3<M>(Sub(uni[i].x, p.x), Sub(uni[i].y, p.y), Sub(uni[i].z, p.z));
             }          
         }
 

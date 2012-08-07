@@ -51,9 +51,9 @@
       <Project>{1C9CB3A2-7456-4F21-8721-CE5739D36C87}</Project>
       <Name>Classification</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FeatureExtraction\FeatureExtraction.csproj">
+    <ProjectReference Include="..\FeatureExtraction\SignalProcessing.csproj">
       <Project>{EEEE7730-1E06-4FBD-8C17-8200F9E32D68}</Project>
-      <Name>FeatureExtraction</Name>
+      <Name>SignalProcessing</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

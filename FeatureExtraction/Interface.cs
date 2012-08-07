@@ -37,7 +37,7 @@ namespace SignalProcessing
     /// <summary>
     /// Activity class meant to define one activity
     /// </summary>
-    class Activity<M> { 
+    public class Activity<M> { 
 
         public Activity(string activity_name) {
             this._activityName = activity_name;
@@ -54,14 +54,13 @@ namespace SignalProcessing
     /// <summary>
     /// Gathers all gestures
     /// </summary>
-    public class GestureSet<M> {
+    public class GestureSet<M> : RecordSet<M> {
+        //List of possible recognizable gestures
+        public List<Gesture<M>> gestures;
 
         public GestureSet() {
             gestures = new List<Gesture<M>>();
         }
-
-        //List of possible recognizable gestures
-        public List<Gesture<M>> gestures;
 
         //Count of gestures in set
         public int Count {
@@ -69,17 +68,26 @@ namespace SignalProcessing
                 return gestures.Count;
             }
         }
+
+        public override void extractFeatureInstances()
+        {
+            throw new NotImplementedException();
+        } 
     }
+
     
     /// <summary>
     /// Gathers all activities
     /// </summary>
-    public class ActivitySet<M> {
+    public class ActivitySet<M> : RecordSet<M> {
         //List of possible recognizable activities
-        //public List<Gesture> activities;
+        public List<Activity<M>> activities;
+
+        public ActivitySet() {
+            activities = new List<Activity<M>>();
+        }
 
         //Count of gestures in set
-        /*
         public int Count
         {
             get
@@ -87,7 +95,29 @@ namespace SignalProcessing
                 return activities.Count;
             }
         }
-        */
+
+        public override void extractFeatureInstances()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override int numberOfFeatureVectors()
+        {            
+            throw new NotImplementedException();
+        }
+
+    }
+
+    /// <summary>
+    /// Covering class of Activity & Gesture Set
+    /// </summary>
+    /// <typeparam name="M">Primitive signal value type</typeparam>
+    public abstract class RecordSet<M> {
+
+        public abstract int numberOfFeatureVectors();
+
+        public abstract void extractFeatureInstances();
+
     }
 
     /// <summary>

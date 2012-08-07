@@ -1,0 +1,5 @@
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\MathPrimitives\bin\Debug\MathPrimitives.dll
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\MathPrimitives\bin\Debug\MathPrimitives.pdb
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\MathPrimitives\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\MathPrimitives\obj\Debug\MathPrimitives.dll
+C:\Users\muzny\Documents\Visual Studio 2010\Projects\FeatureExtraction\MathPrimitives\obj\Debug\MathPrimitives.pdb

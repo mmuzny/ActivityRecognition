@@ -13,7 +13,7 @@ namespace Classification
     {
 
         /// <summary>
-        /// 1d field of features associated with feature instance
+        /// 1D field of features associated with feature instance
         /// </summary>
         public T[] features
         {

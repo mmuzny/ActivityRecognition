@@ -30,7 +30,7 @@ namespace SignalProcessing
         }
 
         //Serves a mean of the signal
-        public float mean
+        public double mean
         {
             get
             {

@@ -20,6 +20,7 @@ namespace Accelerometer
         private static GestureSet<double> gestures;
         private static uWaveRecognizer<Unistroke<double>, GestureSet<double>, double> uwave;
         private static ThreeDollarRecognizer<Unistroke<double>, GestureSet<double>, double> dollar;
+        private static SVM<Unistroke<double>, RecordSet<double>, double> svm;
         private static double x_offset = 0, y_offset = 0, z_offset = 0;
         public static double prev_x = 0, prev_y = 0, prev_z = 0;
         public enum States{

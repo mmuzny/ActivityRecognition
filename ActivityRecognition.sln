@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KNN", "KNN\KNN.csproj", "{1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDA", "LDA\LDA.csproj", "{203F7886-813E-4C4A-A0AA-DABD0702E521}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeatureExtraction", "FeatureExtraction\FeatureExtraction.csproj", "{EEEE7730-1E06-4FBD-8C17-8200F9E32D68}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalProcessing", "FeatureExtraction\SignalProcessing.csproj", "{EEEE7730-1E06-4FBD-8C17-8200F9E32D68}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Classification", "Classification\Classification.csproj", "{1C9CB3A2-7456-4F21-8721-CE5739D36C87}"
 EndProject

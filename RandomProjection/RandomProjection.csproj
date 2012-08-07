@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{622A5AB6-3342-451B-9212-063109429F43}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>6e769d73-c2c2-4ab8-9e2b-99e1e8b6a4e9</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Chronos</RootNamespace>
-    <AssemblyName>Chronos</AssemblyName>
+    <RootNamespace>RandomProjection</RootNamespace>
+    <AssemblyName>RandomProjection</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,14 +30,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="eZ430_Chronos_Net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\eZ430_Chronos_Net.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -47,30 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EZ430Chronos.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\3%24Recognizer\3%24Recognizer.csproj">
-      <Project>{A2D17426-376B-4FFA-82C7-1D59790685B9}</Project>
-      <Name>3%24Recognizer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Classification\Classification.csproj">
-      <Project>{1C9CB3A2-7456-4F21-8721-CE5739D36C87}</Project>
-      <Name>Classification</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FeatureExtraction\SignalProcessing.csproj">
-      <Project>{EEEE7730-1E06-4FBD-8C17-8200F9E32D68}</Project>
-      <Name>SignalProcessing</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SVM\SVM.csproj">
-      <Project>{3DE46545-D325-4778-9342-B4B25A47C0D6}</Project>
-      <Name>SVM</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\uWaveRecognizer\uWaveRecognizer.csproj">
-      <Project>{FF7601BC-34C3-4353-90A8-1A8F7C0B97A6}</Project>
-      <Name>uWaveRecognizer</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
